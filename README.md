@@ -40,6 +40,11 @@ Utilisez le wrapper Maven fourni pour compiler le projet :
 .\mvnw clean compile
 ```
 
+```bash
+# Sur Linux/Mac
+./mvnw clean compile
+```
+
 ### 3. Lancer l'application
 
 Vous avez plusieurs options pour lancer l'application :
@@ -47,14 +52,28 @@ Vous avez plusieurs options pour lancer l'application :
 #### Option 1 : Avec Maven (recommandé)
 
 ```powershell
+# Sur Windows
 .\mvnw spring-boot:run
+```
+
+```bash
+# Sur Linux/Mac
+./mvnw spring-boot:run
 ```
 
 #### Option 2 : Avec le JAR compilé
 
 ```powershell
-# Compiler et packager l'application
+# Sur Windows - Compiler et packager l'application
 .\mvnw clean package
+
+# Lancer le JAR
+java -jar target/microcommerce-0.0.1-SNAPSHOT.jar
+```
+
+```bash
+# Sur Linux/Mac - Compiler et packager l'application
+./mvnw clean package
 
 # Lancer le JAR
 java -jar target/microcommerce-0.0.1-SNAPSHOT.jar
@@ -82,6 +101,13 @@ Une fois l'application lancée, vous pouvez accéder aux endpoints suivants :
 | GET     | `/products`      | Récupère la liste de tous les produits    |
 | GET     | `/products/{id}` | Récupère un produit spécifique par son ID |
 
+### API Commandes (Orders Branch)
+
+| Méthode | Endpoint         | Description                                 |
+| ------- | ---------------- | ------------------------------------------- |
+| GET     | `/orders`        | Récupère la liste de toutes les commandes  |
+| GET     | `/orders/{id}`   | Récupère une commande spécifique par son ID |
+
 ### Endpoints Spring Boot Actuator
 
 | Méthode | Endpoint           | Description                               |
@@ -103,6 +129,32 @@ curl http://localhost:8080/products
 curl http://localhost:8080/products/1
 ```
 
+### Récupérer toutes les commandes (Orders Branch)
+
+```bash
+curl http://localhost:8080/orders
+```
+
+**Réponse exemple :**
+```json
+[
+  {"id":1,"description":"First order","total":100.0},
+  {"id":2,"description":"Second order","total":250.5},
+  {"id":3,"description":"Third order","total":75.25}
+]
+```
+
+### Récupérer une commande spécifique (Orders Branch)
+
+```bash
+curl http://localhost:8080/orders/1
+```
+
+**Réponse exemple :**
+```json
+{"id":1,"description":"First order","total":100.0}
+```
+
 ### Vérifier l'état de l'application
 
 ```bash
@@ -114,7 +166,13 @@ curl http://localhost:8080/actuator/health
 Pour lancer les tests unitaires :
 
 ```powershell
+# Sur Windows
 .\mvnw test
+```
+
+```bash
+# Sur Linux/Mac
+./mvnw test
 ```
 
 ## Structure du projet
@@ -185,7 +243,13 @@ Si le port 8080 est déjà utilisé, vous pouvez :
 
 2. Ou passer le port en paramètre :
    ```powershell
+   # Sur Windows
    .\mvnw spring-boot:run -Dspring-boot.run.arguments=--server.port=8081
+   ```
+   
+   ```bash
+   # Sur Linux/Mac
+   ./mvnw spring-boot:run -Dspring-boot.run.arguments=--server.port=8081
    ```
 
 ### Problèmes de compilation
@@ -193,11 +257,19 @@ Si le port 8080 est déjà utilisé, vous pouvez :
 Si vous rencontrez des problèmes de compilation :
 
 ```powershell
-# Nettoyer le cache Maven
+# Sur Windows - Nettoyer le cache Maven
 .\mvnw clean
 
 # Forcer la recompilation
 .\mvnw clean compile
+```
+
+```bash
+# Sur Linux/Mac - Nettoyer le cache Maven
+./mvnw clean
+
+# Forcer la recompilation
+./mvnw clean compile
 ```
 
 ## Contribuer
