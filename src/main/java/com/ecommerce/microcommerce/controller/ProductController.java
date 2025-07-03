@@ -1,6 +1,5 @@
 package com.ecommerce.microcommerce.controller;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,6 +7,7 @@ import com.ecommerce.microcommerce.service.ProductService;
 import com.ecommerce.microcommerce.model.Product;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("/api")
@@ -31,11 +31,13 @@ public class ProductController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/products")
     public Product createProduct(@RequestBody Product product) {
         return productService.saveProduct(product);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable int id, @RequestBody Product productDetails) {
         if (!productService.existsById(id)) {
@@ -45,6 +47,7 @@ public class ProductController {
         return ResponseEntity.ok(updatedProduct);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/products/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable int id) {
         if (!productService.existsById(id)) {
