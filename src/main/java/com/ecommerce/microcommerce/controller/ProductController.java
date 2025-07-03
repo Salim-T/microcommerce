@@ -1,14 +1,13 @@
 package com.ecommerce.microcommerce.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
-import com.ecommerce.microcommerce.dao.ProductDao;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.ecommerce.microcommerce.dao.ProductDao;
 import com.ecommerce.microcommerce.model.Product;
-import java.util.List;
 
 @RestController
 public class ProductController {
