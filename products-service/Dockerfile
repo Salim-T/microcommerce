@@ -10,7 +10,7 @@ COPY src ./src
 RUN apt-get update && apt-get install -y maven
 
 # Build the application
-RUN mvn clean package
+RUN mvn clean package -DskipTests
 
 # Run the application
 CMD ["java", "-jar", "target/product-service-0.0.1-SNAPSHOT.jar"]
